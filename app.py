@@ -159,41 +159,79 @@ if "results_df" not in st.session_state:
 # ── Landing ───────────────────────────────────────────────────────────────────
 if st.session_state.results_df is None and not run_btn:
     st.markdown("""
-    <div style="text-align:center; padding:48px 20px 36px;">
-        <div class="hero-title">InsightAI</div>
-        <p class="hero-sub">
-            Upload photos of corrected answer sheets.<br>
-            AI reads every paper and tells you exactly
-            <strong style="color:#a78bfa !important;">which concepts to re-teach next class.</strong>
-        </p>
+    <style>
+        [data-testid="stAppViewContainer"] {
+            background: linear-gradient(135deg, #1a0533 0%, #2d1b69 30%, #1e3a8a 65%, #312e81 100%) !important;
+        }
+        .hero-wrap {
+            min-height: 88vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 60px 80px;
+        }
+        .hero-tag {
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            color: rgba(255,255,255,0.5) !important;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+        .hero-main {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 5.5rem;
+            font-weight: 700;
+            color: white !important;
+            line-height: 1.05;
+            margin: 0 0 28px 0;
+        }
+        .hero-divider {
+            width: 320px;
+            height: 1px;
+            background: rgba(255,255,255,0.3);
+            margin: 0 0 28px 0;
+        }
+        .hero-sub {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.55) !important;
+            letter-spacing: 0.05em;
+            margin: 0 0 56px 0;
+            font-style: italic;
+        }
+        .step-pills {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .step-pill {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50px;
+            padding: 10px 22px;
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.75) !important;
+            letter-spacing: 0.03em;
+        }
+        .step-pill span {
+            color: rgba(255,255,255,0.4) !important;
+            margin-right: 8px;
+        }
+    </style>
+
+    <div class="hero-wrap">
+        <div class="hero-tag">AI-Powered · For Educators · Free</div>
+        <div class="hero-main">InsightAI</div>
+        <div class="hero-divider"></div>
+        <div class="hero-sub">What makes a great teacher? Knowing exactly where to focus.</div>
+        <div class="step-pills">
+            <div class="step-pill"><span>01</span> Upload answer sheets</div>
+            <div class="step-pill"><span>02</span> AI reads every paper</div>
+            <div class="step-pill"><span>03</span> Get concept insights</div>
+        </div>
     </div>
     """, unsafe_allow_html=True)
-
-    c1, c2, c3 = st.columns(3)
-    for col, icon, title, desc in zip(
-        [c1, c2, c3],
-        ["📸", "🤖", "📊"],
-        ["Upload Sheets", "AI Reads Everything", "Get Insights"],
-        [
-            "Take photos of corrected answer sheets and upload them",
-            "Gemini reads each paper, finds concepts & mistakes automatically",
-            "See which topics to re-teach — no manual input needed",
-        ],
-    ):
-        with col:
-            st.markdown(f"""
-            <div class="step-card">
-                <div class="step-icon">{icon}</div>
-                <div class="step-title">{title}</div>
-                <div class="step-desc">{desc}</div>
-            </div>""", unsafe_allow_html=True)
-
-    st.markdown("""
-    <div style="text-align:center;color:#64748b;font-size:0.9rem;padding:20px 0 0;">
-        👈 Upload answer sheets in the sidebar and hit Analyse — that's it.
-    </div>""", unsafe_allow_html=True)
     st.stop()
-
 
 # ── Run Analysis ──────────────────────────────────────────────────────────────
 if run_btn and ready:
